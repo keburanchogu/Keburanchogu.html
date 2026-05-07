@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>KEBURANCHOGU ONE-STOP CENTRE - Buy, Sell & Jobs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fb 0%, #e9ecef 100%);
+            color: #1a1a2e;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #e94560, #ff6b6b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .logo p {
+            font-size: 0.7rem;
+            color: #aaa;
+            letter-spacing: 1px;
+        }
+
+        .menu-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a:hover {
+            background: #e94560;
+            transform: translateY(-2px);
+        }
+
+        .admin-badge {
+            background: #e94560;
+            border-radius: 20px;
+            padding: 0.2rem 0.6rem;
+            font-size: 0.7rem;
+            margin-left: 0.3rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 3rem 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat .number {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #e94560;
+        }
+
+        .section-header h2 {
+            font-size: 1.6rem;
+            color: #1a1a2e;
+        }
+
+        .section-header h2 i {
+            margin-right: 0.5rem;
+        }
+
+        /* Compartment Grid Layout */
+        .compartment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Compartment Card */
+        .compartment {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .compartment:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .compartment-header {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .compartment-header h3 {
+            font-size: 1.2rem;
+        }
+
+        .compartment-header .badge {
+            background: #e94560;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+        }
+
+        .compartment-body {
+            padding: 1.5rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        /* Product/Job Cards inside compartments */
+        .item-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            transition: all 0.2s;
+            border-left: 3px solid #e94560;
+        }
+
+        .item-card:hover {
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .item-title {
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .item-price {
+            color: #e94560;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .item-meta {
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: 0.3rem;
+        }
+
+        .item-actions {
+            margin-top: 0.5rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            background: #e94560;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: #c7354e;
+            transform: scale(1.02);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #e94560;
+            color: #e94560;
+        }
+
+        .btn-outline:hover {
+            background: #e94560;
+            color: white;
+        }
+
+        .btn-small {
+            padding: 0.3rem 0.8rem;
+            font-size: 0.75rem;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background: #bb2d3b;
+        }
+
+        .btn-success {
+            background: #28a745;
+        }
+
+        .btn-success:hover {
+            background: #1e7e34;
+        }
+
+        /* Quick Action Bar */
+        .quick-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .quick-action-btn {
+            background: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quick-action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            background: #e94560;
+            color: white;
+        }
+
+        /* Forms */
+        .form-container {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 550px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.3rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #e94560;
+        }
+
+        .password-hint {
+            font-size: 0.7rem;
+            color: #666;
+            margin-top: 0.2rem;
+        }
+
+        /* Payment Options */
+        .payment-options {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .payment-option {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .payment-option.selected {
+            border-color: #e94560;
+            background: #fff0f2;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 24px;
+            padding: 1.5rem;
+            max-width: 550px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #eee;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #999;
+        }
+
+        /* Alert */
+        .alert {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            left: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 1rem;
+            border-radius: 12px;
+            z-index: 1001;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .alert.success {
+            background: #d4edda;
+            color: #155724;
+            border-left: 4px solid #28a745;
+        }
+
+        .alert.error {
+            background: #f8d7da;
+            color: #721c24;
+            border-left: 4px solid #dc3545;
+        }
+
+        .alert.warning {
+            background: #fff3cd;
+            color: #856404;
+            border-left: 4px solid #ffc107;
+        }
+
+        /* Data Tables for Admin */
+        .data-table {
+            background: white;
+            border-radius: 16px;
+            overflow-x: auto;
+            padding: 1rem;
+        }
+
+        .data-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .data-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a2e;
+            color: #aaa;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                margin-top: 1rem;
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .compartment-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.3rem;
+            }
+
+            .quick-actions {
+                flex-direction: column;
+            }
+
+            .quick-action-btn {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-top">
+            <div class="logo">
+                <h1>🏪 KEBURANCHOGU</h1>
+                <p>ONE-STOP CENTRE</p>
+            </div>
+            <button class="menu-btn" onclick="toggleMenu()">☰</button>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a href="#" onclick="showPage('home')">🏠 Home</a>
+            <a href="#" onclick="showPage('products')">🛍️ Marketplace</a>
+            <a href="#" onclick="showPage('jobs')">💼 Job Board</a>
+            <a href="#" onclick="showPage('sell')">📦 Sell Item</a>
+            <a href="#" onclick="showPage('postJob')">📢 Post Job</a>
+            <a href="#" onclick="showPage('orders')">📋 My Orders</a>
+            <a href="#" onclick="showPage('dashboard')">📊 Dashboard</a>
+            <a href="#" id="adminLink" style="display:none" onclick="showPage('admin')">⚙️ Admin Panel</a>
+            <a href="#" onclick="showAuthModal()" id="authBtn">🔐 Login/Register</a>
+        </div>
+    </div>
+
+    <div class="container" id="mainContainer">
+        <!-- Dynamic content loads here -->
+    </div>
+
+    <div class="footer">
+        <p>&copy; ©2026 KEBURANCHOGU ONE-STOP CENTRE | Your Trusted Marketplace & Job Hub</p>
+        <p style="font-size: 0.8rem; margin-top: 0.5rem;"> Kisii, Kenya | 📞 +254 794681374 | ✉️ keburanchogu001@gmail.com</p>
+    </div>
+
+    <!-- Auth Modal -->
+    <div class="modal" id="authModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">🔐 Login</h3>
+                <button class="close-modal" onclick="closeAuthModal()">&times;</button>
+            </div>
+            <div id="authForm">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="loginUsername" placeholder="Enter username">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter password">
+                </div>
+                <button class="btn" style="width:100%" onclick="login()">Login</button>
+                <p style="text-align:center; margin-top:1rem">
+                    No account? <a href="#" onclick="switchToRegister()">Register</a>
+                </p>
+            </div>
+            <div id="registerForm" style="display:none">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="regUsername" placeholder="Choose username">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="regEmail" placeholder="Your email">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="regPassword" placeholder="Create password">
+                    <div class="password-hint">⚠️ Strong password: minimum 8 characters, letters and numbers</div>
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" id="regConfirmPassword" placeholder="Confirm password">
+                </div>
+                <button class="btn" style="width:100%" onclick="register()">Register</button>
+                <p style="text-align:center; margin-top:1rem">
+                    Have account? <a href="#" onclick="switchToLogin()">Login</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Modal -->
+    <div class="modal" id="orderModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🛒 Place Your Order</h3>
+                <button class="close-modal" onclick="closeOrderModal()">&times;</button>
+            </div>
+            <div id="orderDetails"></div>
+            <div class="payment-options">
+                <div class="payment-option" id="optionPayOnOrder" onclick="selectPaymentMethod('pay_on_order')">
+                    💳 Pay on Order (M-Pesa)
+                </div>
+                <div class="payment-option" id="optionPayOnDelivery" onclick="selectPaymentMethod('pay_on_delivery')">
+                    🚚 Pay on Delivery (Cash)
+                </div>
+            </div>
+            <div id="mpesaSection">
+                <div class="form-group">
+                    <label>M-Pesa Phone Number</label>
+                    <input type="tel" id="mpesaPhone" placeholder="0712345678">
+                </div>
+            </div>
+            <button class="btn" style="width:100%; margin-top:1rem" onclick="confirmOrder()">✅ Confirm Order</button>
+        </div>
+    </div>
+
+    <script>
+        // ============ DATA STORAGE ============
+        let currentUser = null;
+        let selectedPaymentMethod = 'pay_on_order';
+        let currentProductForOrder = null;
+        
+        // Initialize with admin account
+        if (!localStorage.getItem('users')) {
+            localStorage.setItem('users', JSON.stringify([
+                {
+                    username: "admin",
+                    email: "admin@keburanchogu.com",
+                    password: "Admin123",
+                    role: "admin",
+                    joined: new Date().toISOString()
+                }
+            ]));
+        }
+        
+        if (!localStorage.getItem('products')) {
+            localStorage.setItem('products', JSON.stringify([
+                {
+                    id: 1,
+                    seller: "admin",
+                    title: "Samsung Galaxy S21",
+                    category: "electronics",
+                    price: 45000,
+                    description: "Like new, 128GB, comes with charger, 6 months warranty",
+                    image: "",
+                    created_at: new Date().toISOString()
+                },
+                {
+                    id: 2,
+                    seller: "admin",
+                    title: "Wooden Dining Table",
+                    category: "furniture",
+                    price: 12500,
+                    description: "6-seater solid wood table, good condition, free delivery within Nairobi",
+                    image: "",
+                    created_at: new Date().toISOString()
+                },
+                {
+                    id: 3,
+                    seller: "admin",
+                    title: "Men's Leather Jacket",
+                    category: "clothes",
+                    price: 3500,
+                    description: "Genuine leather, size L, like new",
+                    image: "",
+                    created_at: new Date().toISOString()
+                }
+            ]));
+        }
+        if (!localStorage.getItem('jobs')) {
+            localStorage.setItem('jobs', JSON.stringify([
+                {
+                    id: 1,
+                    employer: "admin",
+                    title: "Senior Web Developer",
+                    location: "Nairobi (Hybrid)",
+                    job_type: "full",
+                    description: "Looking for experienced Django/React developer. 3+ years experience required.",
+                    salary: "80k-120k KES",
+                    created_at: new Date().toISOString()
+                },
+                {
+                    id: 2,
+                    employer: "admin",
+                    title: "Sales Representative",
+                    location: "Mombasa",
+                    job_type: "full",
+                    description: "Join our growing sales team. Commission based + bonus.",
+                    salary: "30k + Commission",
+                    created_at: new Date().toISOString()
+                }
+            ]));
+        }
+        if (!localStorage.getItem('orders')) {
+            localStorage.setItem('orders', JSON.stringify([]));
+        }
+
+        // Helper functions
+        function getUsers() { return JSON.parse(localStorage.getItem('users')); }
+        function getProducts() { return JSON.parse(localStorage.getItem('products')); }
+        function getJobs() { return JSON.parse(localStorage.getItem('jobs')); }
+        function getOrders() { return JSON.parse(localStorage.getItem('orders')); }
+        
+        function saveUsers(data) { localStorage.setItem('users', JSON.stringify(data)); }
+        function saveProducts(data) { localStorage.setItem('products', JSON.stringify(data)); }
+        function saveJobs(data) { localStorage.setItem('jobs', JSON.stringify(data)); }
+        function saveOrders(data) { localStorage.setItem('orders', JSON.stringify(data)); }
+
+        // ============ STRONG PASSWORD VALIDATION ============
+        function isStrongPassword(password) {
+            const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+            return regex.test(password);
+        }
+
+        // ============ AUTHENTICATION ============
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('show');
+        }
+
+        function showAuthModal() {
+            document.getElementById('authModal').classList.add('active');
+        }
+
+        function closeAuthModal() {
+            document.getElementById('authModal').classList.remove('active');
+        }
+
+        function switchToRegister() {
+            document.getElementById('authForm').style.display = 'none';
+            document.getElementById('registerForm').style.display = 'block';
+            document.getElementById('modalTitle').innerHTML = '📝 Register';
+        }
+
+        function switchToLogin() {
+            document.getElementById('registerForm').style.display = 'none';
+            document.getElementById('authForm').style.display = 'block';
+            document.getElementById('modalTitle').innerHTML = '🔐 Login';
+        }
+
+        function login() {
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            const users = getUsers();
+            const user = users.find(u => u.username === username && u.password === password);
+            
+            if (user) {
+                currentUser = user;
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                closeAuthModal();
+                updateAuthButton();
+                showPage('home');
+                showAlert('success', `🎉 Welcome back, ${username}!`);
+            } else {
+                showAlert('error', '❌ Invalid username or password');
+            }
+        }
+
+        function register() {
+            const username = document.getElementById('regUsername').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+            const confirmPassword = document.getElementById('regConfirmPassword').value;
+            const users = getUsers();
+            
+            if (!username || !email || !password) {
+                showAlert('error', 'Please fill all fields');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showAlert('error', 'Passwords do not match');
+                return;
+            }
+            
+            if (!isStrongPassword(password)) {
+                showAlert('error', 'Password must be at least 8 characters and contain both letters and numbers');
+                return;
+            }
+            
+            if (users.find(u => u.username === username)) {
+                showAlert('error', 'Username already exists');
+                return;
+            }
+            
+            const newUser = { 
+                username, 
+                email, 
+                password, 
+                role: "user",
+                joined: new Date().toISOString() 
+            };
+            users.push(newUser);
+            saveUsers(users);
+            currentUser = newUser;
+            localStorage.setItem('currentUser', JSON.stringify(newUser));
+            closeAuthModal();
+            updateAuthButton();
+            showPage('home');
+            showAlert('success', '🎉 Registration successful! Welcome to Keburanchogu!');
+        }
+
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('currentUser');
+            updateAuthButton();
+            showPage('home');
+            showAlert('success', '👋 Logged out successfully');
+        }
+
+        function updateAuthButton() {
+            const authBtn = document.getElementById('authBtn');
+            const adminLink = document.getElementById('adminLink');
+            
+            if (currentUser) {
+                authBtn.innerHTML = `👤 ${currentUser.username} | Logout`;
+                authBtn.setAttribute('onclick', 'logout()');
+                
+                if (currentUser.role === 'admin') {
+                    adminLink.style.display = 'inline-block';
+                } else {
+                    adminLink.style.display = 'none';
+                }
+            } else {
+                authBtn.innerHTML = '🔐 Login/Register';
+                authBtn.setAttribute('onclick', 'showAuthModal()');
+                adminLink.style.display = 'none';
+            }
+        }
+
+        function checkAuth() {
+            const savedUser = localStorage.getItem('currentUser');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                updateAuthButton();
+            }
+        }
+
+        // ============ ORDER PLACEMENT ============
+        function selectPaymentMethod(method) {
+            selectedPaymentMethod = method;
+            const mpesaSection = document.getElementById('mpesaSection');
+            const option1 = document.getElementById('optionPayOnOrder');
+            const option2 = document.getElementById('optionPayOnDelivery');
+            
+            if (method === 'pay_on_order') {
+                mpesaSection.style.display = 'block';
+                option1.classList.add('selected');
+                option2.classList.remove('selected');
+            } else {
+                mpesaSection.style.display = 'none';
+                option2.classList.add('selected');
+                option1.classList.remove('selected');
+            }
+        }
+
+        function openOrderModal(productId) {
+            if (!currentUser) {
+                showAlert('error', 'Please login first to place an order');
+                showAuthModal();
+                return;
+            }
+            
+            const product = getProducts().find(p => p.id === productId);
+            if (!product) return;
+            
+            currentProductForOrder = product;
+            selectedPaymentMethod = 'pay_on_order';
+            
+            document.getElementById('orderDetails').innerHTML = `
+                <div style="background: #f8f9fa; border-radius: 12px; padding: 1rem; margin-bottom: 1rem;">
+                    <h3>📦 ${escapeHtml(product.title)}</h3>
+                    <div style="font-size: 1.5rem; color: #e94560; font-weight: bold;">KES ${product.price.toLocaleString()}</div>
+                    <p style="margin-top: 0.5rem;">${escapeHtml(product.description)}</p>
+                    <small>👤 Seller: ${product.seller}</small>
+                </div>
+            `;
+            
+            // Reset payment options
+            document.getElementById('mpesaSection').style.display = 'block';
+            document.getElementById('optionPayOnOrder').classList.add('selected');
+            document.getElementById('optionPayOnDelivery').classList.remove('selected');
+            
+            document.getElementById('orderModal').classList.add('active');
+        }
+
+        function closeOrderModal() {
+            document.getElementById('orderModal').classList.remove('active');
+            currentProductForOrder = null;
+        }
+
+        function confirmOrder() {
+            if (!currentProductForOrder) return;
+            
+            let orderStatus = 'pending';
+            let paymentMethod = selectedPaymentMethod;
+            
+            if (paymentMethod === 'pay_on_order') {
+                const phone = document.getElementById('mpesaPhone').value;
+                if (!phone) {
+                    showAlert('error', 'Please enter M-Pesa phone number');
+                    return;
+                }
+                if (!phone.match(/^07\d{8}$|^01\d{8}$|^2547\d{8}$/)) {
+                    showAlert('error', 'Please enter a valid Kenyan phone number');
+                    return;
+                }
+                orderStatus = 'paid';
+                showAlert('success', '✅ M-Pesa payment successful!');
+            } else {
+                orderStatus = 'pending_delivery';
+                showAlert('success', '✅ Order placed successfully! Pay on delivery.');
+            }
+            
+            const order = {
+                id: Date.now(),
+                buyer: currentUser.username,
+                productId: currentProductForOrder.id,
+                productTitle: currentProductForOrder.title,
+                amount: currentProductForOrder.price,
+                seller: currentProductForOrder.seller,
+                paymentMethod: paymentMethod,
+                status: orderStatus,
+                phone: paymentMethod === 'pay_on_order' ? document.getElementById('mpesaPhone').value : null,
+                created_at: new Date().toISOString()
+            };
+            
+            const orders = getOrders();
+            orders.push(order);
+            saveOrders(orders);
+            
+            closeOrderModal();
+            showPage('orders');
+        }
+
+        // ============ COMPARTMENTALIZED PAGE RENDERING ============
+        function showPage(page) {
+            const container = document.getElementById('mainContainer');
+            const pages = {
+                home: renderHome,
+                products: renderProductsPage,
+                jobs: renderJobsPage,
+                sell: renderSellForm,
+                postJob: renderPostJobForm,
+                orders: renderOrdersPage,
+                dashboard: renderDashboard,
+                admin: renderAdminPanel
+            };
+            
+            if (pages[page]) {
+                container.innerHTML = pages[page]();
+            }
+            
+            document.getElementById('navLinks').classList.remove('show');
+            window.scrollTo(0, 0);
+        }
+
+        function renderHome() {
+            const products = getProducts().slice(0, 6);
+            const jobs = getJobs().slice(0, 4);
+            const totalProducts = getProducts().length;
+            const totalJobs = getJobs().length;
+            const totalUsers = getUsers().length;
+            
+            return `
+                <div class="hero">
+                    <h1>🏪 Welcome to KEBURANCHOGU ONE-STOP CENTRE</h1>
+                    <p>Your Trusted Marketplace & Job Hub | Buy, Sell, and Find Opportunities</p>
+                    <div class="hero-stats">
+                        <div class="hero-stat"><div class="number">${totalProducts}+</div><div>Products</div></div>
+                        <div class="hero-stat"><div class="number">${totalJobs}+</div><div>Jobs</div></div>
+                        <div class="hero-stat"><div class="number">${totalUsers}+</div><div>Users</div></div>
+                    </div>
+                </div>
+                
+                <div class="quick-actions">
+                    <button class="quick-action-btn" onclick="showPage('products')">🛍️ Browse Marketplace</button>
+                    <button class="quick-action-btn" onclick="showPage('jobs')">💼 Find Jobs</button>
+                    <button class="quick-action-btn" onclick="showPage('sell')">📦 Sell Your Item</button>
+                    <button class="quick-action-btn" onclick="showPage('postJob')">📢 Post a Job</button>
+                </div>
+                
+                <div class="compartment-grid">
+                    <div class="compartment">
+                        <div class="compartment-header">
+                            <h3>🛍️ Latest Products</h3>
+                            <span class="badge">${products.length} items</span>
+                        </div>
+                        <div class="compartment-body">
+                            ${products.map(p => renderProductItem(p)).join('')}
+                            ${products.length === 0 ? '<p style="text-align:center; color:#999;">No products yet</p>' : ''}
+                            <div style="text-align:center; margin-top:1rem;">
+                                <button class="btn btn-small btn-outline" onclick="showPage('products')">View All →</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="compartment">
+                        <div class="compartment-header">
+                            <h3>💼 Recent Jobs</h3>
+                            <span class="badge">${jobs.length} openings</span>
+                        </div>
+                        <div class="compartment-body">
+                            ${jobs.map(j => renderJobItem(j)).join('')}
+                            ${jobs.length === 0 ? '<p style="text-align:center; color:#999;">No jobs yet</p>' : ''}
+                            <div style="text-align:center; margin-top:1rem;">
+                                <button class="btn btn-small btn-outline" onclick="showPage('jobs')">View All →</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="compartment">
+                        <div class="compartment-header">
+                            <h3>🚚 How It Works</h3>
+                            <span class="badge">Simple</span>
+                        </div>
+                        <div class="compartment-body">
+                            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                                <div><strong>1️⃣ Register</strong><br>Create a free account</div>
+                                <div><strong>2️⃣ Browse or Post</strong><br>Buy products or sell your items</div>
+                                <div><strong>3️⃣ Pay Securely</strong><br>M-Pesa or Cash on Delivery</div>
+                                <div><strong>4️⃣ Get Delivered</strong><br>Receive your item or find a job</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderProductItem(product) {
+            const isAdmin = currentUser && currentUser.role === 'admin';
+            return `
+                <div class="item-card">
+                    <div class="item-title">${escapeHtml(product.title)}</div>
+                    <div class="item-price">KES ${product.price.toLocaleString()}</div>
+                    <div class="item-meta">📂 ${product.category} | 👤 ${product.seller}</div>
+                    <div class="item-actions">
+                        <button class="btn btn-small" onclick="openOrderModal(${product.id})">🛒 Order Now</button>
+                        ${isAdmin ? `<button class="btn btn-small btn-danger" onclick="deleteProduct(${product.id})">🗑️ Delete</button>` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderJobItem(job) {
+            const typeLabels = { full: 'Full-time', part: 'Part-time', contract: 'Contract', remote: 'Remote' };
+            const isAdmin = currentUser && currentUser.role === 'admin';
+            return `
+                <div class="item-card">
+                    <div class="item-title">${escapeHtml(job.title)}</div>
+                    <div class="item-meta">📍 ${job.location} | ${typeLabels[job.job_type] || job.job_type}</div>
+                    <div class="item-meta">💰 ${job.salary || 'Negotiable'}</div>
+                    ${isAdmin ? `<div class="item-actions"><button class="btn btn-small btn-danger" onclick="deleteJob(${job.id})">🗑️ Delete</button></div>` : ''}
+                </div>
+            `;
+        }
+
+        function renderProductsPage() {
+            const products = getProducts();
+            const isAdmin = currentUser && currentUser.role === 'admin';
+            
+            return `
+                <div class="section-header">
+                    <h2>🛍️ Marketplace</h2>
+                    <select onchange="filterProducts(this.value)" style="padding: 0.5rem; border-radius: 25px;">
+                        <option value="">All Categories</option>
+                        <option value="household">🏠 Household</option>
+                        <option value="furniture">🪑 Furniture</option>
+                        <option value="electronics">📱 Electronics</option>
+                        <option value="clothes">👕 Clothes</option>
+                        <option value="vehicles">🚗 Vehicles</option>
+                    </select>
+                </div>
+                <div class="compartment-grid" id="productsGrid">
+                    ${products.map(p => renderFullProductCard(p, isAdmin)).join('')}
+                </div>
+            `;
+        }
+
+        function renderFullProductCard(product, isAdmin) {
+            return `
+                <div class="compartment">
+                    <div class="compartment-header">
+                        <h3>${escapeHtml(product.title)}</h3>
+                        <span class="badge">${product.category}</span>
+                    </div>
+                    <div class="compartment-body">
+                        <div class="item-price">KES ${product.price.toLocaleString()}</div>
+                        <p style="margin: 0.5rem 0;">${escapeHtml(product.description)}</p>
+                        <div class="item-meta">👤 Seller: ${product.seller}</div>
+                        <div class="item-actions" style="margin-top: 1rem;">
+                            <button class="btn" onclick="openOrderModal(${product.id})">🛒 Place Order</button>
+                            ${isAdmin ? `<button class="btn btn-danger" onclick="deleteProduct(${product.id})">🗑️ Delete</button>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderJobsPage() {
+            const jobs = getJobs();
+            const isAdmin = currentUser && currentUser.role === 'admin';
+            const typeLabels = { full: 'Full-time', part: 'Part-time', contract: 'Contract', remote: 'Remote' };
+            
+            return `
+                <div class="section-header">
+                    <h2>💼 Job Board</h2>
+                    <select onchange="filterJobs(this.value)" style="padding: 0.5rem; border-radius: 25px;">
+                        <option value="">All Types</option>
+                        <option value="full">Full-time</option>
+                        <option value="part">Part-time</option>
+                        <option value="contract">Contract</option>
+                        <option value="remote">Remote</option>
+                    </select>
+                </div>
+                <div class="compartment-grid" id="jobsGrid">
+                    ${jobs.map(job => `
+                        <div class="compartment">
+                            <div class="compartment-header">
+                                <h3>${escapeHtml(job.title)}</h3>
+                                <span class="badge">${typeLabels[job.job_type] || job.job_type}</span>
+                            </div>
+                            <div class="compartment-body">
+                                <div class="item-meta">📍 ${job.location}</div>
+                                <div class="item-meta">💰 ${job.salary || 'Negotiable'}</div>
+                                <p style="margin: 0.5rem 0;">${escapeHtml(job.description)}</p>
+                                <div class="item-meta">👤 Posted by: ${job.employer}</div>
+                                ${isAdmin ? `<div class="item-actions" style="margin-top: 1rem;"><button class="btn btn-danger" onclick="deleteJob(${job.id})">🗑️ Delete</button></div>` : ''}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function renderOrdersPage() {
+            if (!currentUser) {
+                return `<div class="alert error">Please <a href="#" onclick="showAuthModal()">login</a> to view your orders.</div>`;
+            }
+            
+            const orders = getOrders().filter(o => o.buyer === currentUser.username);
+            const statusLabels = {
+                pending: '⏳ Pending Payment',
+                paid: '✅ Paid - Processing',
+                pending_delivery: '🚚 Pay on Delivery',
+                delivered: '📦 Delivered',
+                cancelled: '❌ Cancelled'
+            };
+            
+            if (orders.length === 0) {
+                return `<div class="compartment"><div class="compartment-body" style="text-align:center;"><p>📭 You haven't placed any orders yet.</p><button class="btn" onclick="showPage('products')">🛍️ Start Shopping</button></div></div>`;
+            }
+            
+            return `
+                <div class="section-header">
+                    <h2>📋 My Orders</h2>
+                </div>
+                <div class="compartment-grid">
+                    ${orders.map(order => `
+                        <div class="compartment">
+                            <div class="compartment-header">
+                                <h3>📦 ${escapeHtml(order.productTitle)}</h3>
+                                <span class="badge">${order.paymentMethod === 'pay_on_order' ? '💳 M-Pesa' : '🚚 Cash on Delivery'}</span>
+                            </div>
+                            <div class="compartment-body">
+                                <div class="item-price">KES ${order.amount.toLocaleString()}</div>
+                                <div class="item-meta">Status: ${statusLabels[order.status] || order.status}</div>
+                                <div class="item-meta">Ordered: ${new Date(order.created_at).toLocaleDateString()}</div>
+                                ${order.status === 'pending_delivery' ? `<button class="btn btn-small btn-success" style="margin-top: 0.5rem;" onclick="markDelivered(${order.id})">📦 Mark as Delivered</button>` : ''}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function renderSellForm() {
+            if (!currentUser) {
+                return `<div class="alert error">Please <a href="#" onclick="showAuthModal()">login</a> to sell products.</div>`;
+            }
+            
+            return `
+                <div class="form-container">
+                    <h2 style="text-align:center; margin-bottom:1rem;">📦 List a Product for Sale</h2>
+                    <div id="sellAlert"></div>
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" id="productTitle" placeholder="e.g., iPhone 13 Pro">
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="productCategory">
+                            <option value="household">🏠 Household</option>
+                            <option value="furniture">🪑 Furniture</option>
+                            <option value="electronics">📱 Electronics</option>
+                            <option value="clothes">👕 Clothes</option>
+                            <option value="vehicles">🚗 Motor Vehicles</option>
+                            <option value="other">📦 Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Price (KES)</label>
+                        <input type="number" id="productPrice" placeholder="e.g., 5000">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="productDescription" rows="4" placeholder="Describe your product..."></textarea>
+                    </div>
+                    <button class="btn" style="width:100%" onclick="addProduct()">✅ List Product</button>
+                </div>
+            `;
+        }
+
+        function renderPostJobForm() {
+            if (!currentUser) {
+                return `<div class="alert error">Please <a href="#" onclick="showAuthModal()">login</a> to post jobs.</div>`;
+            }
+            
+            return `
+                <div class="form-container">
+                    <h2 style="text-align:center; margin-bottom:1rem;">📢 Post a Job Opportunity</h2>
+                    <div id="jobAlert"></div>
+                    <div class="form-group">
+                        <label>Job Title</label>
+                        <input type="text" id="jobTitle" placeholder="e.g., Senior Developer">
+                    </div>
+                    <div class="form-group">
+                        <label>Location</label>
+                        <input type="text" id="jobLocation" placeholder="e.g., Nairobi or Remote">
+                    </div>
+                    <div class="form-group">
+                        <label>Job Type</label>
+                        <select id="jobType">
+                            <option value="full">Full-time</option>
+                            <option value="part">Part-time</option>
+                            <option value="contract">Contract</option>
+                            <option value="remote">Remote</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Salary (optional)</label>
+                        <input type="text" id="jobSalary" placeholder="e.g., 50k-80k KES">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="jobDescription" rows="5" placeholder="Describe the role, requirements, benefits..."></textarea>
+                    </div>
+                    <button class="btn" style="width:100%" onclick="addJob()">✅ Post Job</button>
+                </div>
+            `;
+        }
+
+        function renderDashboard() {
+            if (!currentUser) {
+                return `<div class="alert error">Please <a href="#" onclick="showAuthModal()">login</a> to view your dashboard.</div>`;
+            }
+            
+            const myProducts = getProducts().filter(p => p.seller === currentUser.username);
+            const myJobs = getJobs().filter(j => j.employer === currentUser.username);
+            const myOrders = getOrders().filter(o => o.buyer === currentUser.username);
+            const salesAsSeller = getOrders().filter(o => o.seller === currentUser.username);
+            
+            return `
+                <div class="section-header">
+                    <h2>📊 My Dashboard</h2>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                    <div class="compartment"><div class="compartment-body" style="text-align:center;"><div style="font-size:2rem; font-weight:bold;">${myProducts.length}</div><div>Products Listed</div></div></div>
+                    <div class="compartment"><div class="compartment-body" style="text-align:center;"><div style="font-size:2rem; font-weight:bold;">${myJobs.length}</div><div>Jobs Posted</div></div></div>
+                    <div class="compartment"><div class="compartment-body" style="text-align:center;"><div style="font-size:2rem; font-weight:bold;">${myOrders.filter(o => o.status === 'paid' || o.status === 'pending_delivery').length}</div><div>Orders Placed</div></div></div>
+                    <div class="compartment"><div class="compartment-body" style="text-align:center;"><div style="font-size:2rem; font-weight:bold;">${salesAsSeller.length}</div><div>Sales Made</div></div></div>
+                </div>
+                
+                <div class="compartment-grid">
+                    <div class="compartment">
+                        <div class="compartment-header"><h3>📦 My Products</h3></div>
+                        <div class="compartment-body">
+                            ${myProducts.map(p => `<div class="item-card"><div class="item-title">${escapeHtml(p.title)}</div><div class="item-price">KES ${p.price.toLocaleString()}</div></div>`).join('')}
+                            ${myProducts.length === 0 ? '<p style="text-align:center;">No products yet. <a href="#" onclick="showPage(\'sell\')">Sell something</a></p>' : ''}
+                        </div>
+                    </div>
+                    <div class="compartment">
+                        <div class="compartment-header"><h3>💼 My Jobs</h3></div>
+                        <div class="compartment-body">
+                            ${myJobs.map(j => `<div class="item-card"><div class="item-title">${escapeHtml(j.title)}</div><div class="item-meta">📍 ${j.location}</div></div>`).join('')}
+                            ${myJobs.length === 0 ? '<p style="text-align:center;">No jobs posted. <a href="#" onclick="showPage(\'postJob\')">Post a job</a></p>' : ''}
+                        </div>
+                    </div>
+                    <div class="compartment">
+                        <div class="compartment-header"><h3>🛒 Recent Orders</h3></div>
+                        <div class="compartment-body">
+                            ${myOrders.slice(0,5).map(o => `<div class="item-card"><div class="item-title">${escapeHtml(o.productTitle)}</div><div class="item-price">KES ${o.amount.toLocaleString()}</div><div class="item-meta">Status: ${o.status}</div></div>`).join('')}
+                            ${myOrders.length === 0 ? '<p style="text-align:center;">No orders yet. <a href="#" onclick="showPage(\'products\')">Start shopping</a></p>' : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ============ ADMIN PANEL ============
+        function renderAdminPanel() {
+            if (!currentUser || currentUser.role !== 'admin') {
+                return `<div class="alert error">⛔ Access denied. Admin only.</div>`;
+            }
+            
+            const users = getUsers();
+            const products = getProducts();
+            const jobs = getJobs();
+            const orders = getOrders();
+            
+            return `
+                <div class="section-header">
+                    <h2>⚙️ Admin Control Panel</h2>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                    <div class="compartment"><div class="compartment-body" style="text-align:center;"><div style="font-size:2rem; font-weight:bold;">${users.length}</div><div>Total Users</div></div></div>
+                    <div class="compartment"><div class="compartment-body" style="text-align:center;"><div style="font-size:2rem; font-weight:bold;">${products.length}</div><div>Products</div></div></div>
+                    <div class="compartment"><div class="compartment-body" style="text-align:center;"><div style="font-size:2rem; font-weight:bold;">${jobs.length}</div><div>Jobs</div></div></div>
+                    <div class="compartment"><div class="compartment-body" style="text-align:center;"><div style="font-size:2rem; font-weight:bold;">${orders.length}</div><div>Orders</div></div></div>
+                </div>
+                
+                <div class="tabs" style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                    <button class="btn btn-small" onclick="showAdminTab('users')">👥 Users</button>
+                    <button class="btn btn-small" onclick="showAdminTab('products')">📦 Products</button>
+                    <button class="btn btn-small" onclick="showAdminTab('jobs')">💼 Jobs</button>
+                    <button class="btn btn-small" onclick="showAdminTab('orders')">📋 Orders</button>
+                </div>
+                
+                <div id="adminTabContent" class="data-table">
+                    ${renderUsersTable(users)}
+                </div>
+            `;
+        }
+
+        function renderUsersTable(users) {
+            return `
+                <button class="btn btn-small btn-success" onclick="showAddUserModal()" style="margin-bottom: 1rem;">➕ Add New User</button>
+                <table>
+                    <thead><tr><th>Username</th><th>Email</th><th>Role</th><th>Joined</th><th>Actions</th></tr></thead>
+                    <tbody>
+                        ${users.map(user => `
+                            <tr>
+                                <td>${escapeHtml(user.username)}</td>
+                                <td>${escapeHtml(user.email)}</td>
+                                <td><span class="badge">${user.role}</span></td>
+                                <td>${new Date(user.joined).toLocaleDateString()}</td>
+                                <td>${user.username !== 'admin' ? `<button class="btn btn-small btn-danger" onclick="deleteUser('${user.username}')">Delete</button>` : '<small>🔒 Protected</small>'}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        function renderProductsTable(products) {
+            return `
+                <table>
+                    <thead><tr><th>Title</th><th>Seller</th><th>Price</th><th>Category</th><th>Actions</th></tr></thead>
+                    <tbody>
+                        ${products.map(product => `
+                            <tr>
+                                <td>${escapeHtml(product.title)}</td>
+                                <td>${product.seller}</td>
+                                <td>KES ${product.price.toLocaleString()}</td>
+                                <td>${product.category}</td>
+                                <td><button class="btn btn-small btn-danger" onclick="deleteProduct(${product.id})">Delete</button></td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        function renderJobsTable(jobs) {
+            return `
+                <table>
+                    <thead><tr><th>Title</th><th>Employer</th><th>Location</th><th>Type</th><th>Actions</th></tr></thead>
+                    <tbody>
+                        ${jobs.map(job => `
+                            <tr>
+                                <td>${escapeHtml(job.title)}</td>
+                                <td>${job.employer}</td>
+                                <td>${job.location}</td>
+                                <td>${job.job_type}</td>
+                                <td><button class="btn btn-small btn-danger" onclick="deleteJob(${job.id})">Delete</button></td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        function renderOrdersTable(orders) {
+            const statusLabels = { pending: 'Pending', paid: 'Paid', pending_delivery: 'Pending Delivery', delivered: 'Delivered' };
+            return `
+                <table>
+                    <thead><tr><th>Product</th><th>Buyer</th><th>Seller</th><th>Amount</th><th>Payment</th><th>Status</th></tr></thead>
+                    <tbody>
+                        ${orders.map(order => `
+                            <tr>
+                                <td>${escapeHtml(order.productTitle)}</td>
+                                <td>${order.buyer}</td>
+                                <td>${order.seller}</td>
+                                <td>KES ${order.amount.toLocaleString()}</td>
+                                <td>${order.paymentMethod === 'pay_on_order' ? 'M-Pesa' : 'Cash on Delivery'}</td>
+                                <td>${statusLabels[order.status] || order.status}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        function showAdminTab(tab) {
+            const users = getUsers();
+            const products = getProducts();
+            const jobs = getJobs();
+            const orders = getOrders();
+            const content = document.getElementById('adminTabContent');
+            
+            if (tab === 'users') content.innerHTML = renderUsersTable(users);
+            else if (tab === 'products') content.innerHTML = renderProductsTable(products);
+            else if (tab === 'jobs') content.innerHTML = renderJobsTable(jobs);
+            else if (tab === 'orders') content.innerHTML = renderOrdersTable(orders);
+        }
+
+        function showAddUserModal() {
+            const password = prompt("Enter password for new user (min 8 chars with letters and numbers):");
+            if (!password) return;
+            if (!isStrongPassword(password)) {
+                showAlert('error', 'Password must be at least 8 characters with letters and numbers');
+                return;
+            }
+            const username = prompt("Enter username:");
+            if (!username) return;
+            const email = prompt("Enter email:");
+            if (!email) return;
+            
+            const users = getUsers();
+            if (users.find(u => u.username === username)) {
+                showAlert('error', 'Username already exists');
+                return;
+            }
+            
+            users.push({ username, email, password, role: "user", joined: new Date().toISOString() });
+            saveUsers(users);
+            showAlert('success', 'User added successfully');
+            showAdminTab('users');
+        }
+
+        function deleteUser(username) {
+            if (confirm(`Delete user "${username}"?`)) {
+                let users = getUsers();
+                users = users.filter(u => u.username !== username);
+                saveUsers(users);
+                showAlert('success', 'User deleted');
+                showAdminTab('users');
+            }
+        }
+
+        function deleteProduct(productId) {
+            if (confirm('Delete this product?')) {
+                let products = getProducts();
+                products = products.filter(p => p.id !== productId);
+                saveProducts(products);
+                showAlert('success', 'Product deleted');
+                showPage('products');
+            }
+        }
+
+        function deleteJob(jobId) {
+            if (confirm('Delete this job?')) {
+                let jobs = getJobs();
+                jobs = jobs.filter(j => j.id !== jobId);
+                saveJobs(jobs);
+                showAlert('success', 'Job deleted');
+                showPage('jobs');
+            }
+        }
+
+        function markDelivered(orderId) {
+            const orders = getOrders();
+            const order = orders.find(o => o.id === orderId);
+            if (order) {
+                order.status = 'delivered';
+                saveOrders(orders);
+                showAlert('success', 'Order marked as delivered');
+                showPage('orders');
+            }
+        }
+
+        // ============ CRUD OPERATIONS ============
+        function addProduct() {
+            const title = document.getElementById('productTitle').value;
+            const category = document.getElementById('productCategory').value;
+            const price = parseFloat(document.getElementById('productPrice').value);
+            const description = document.getElementById('productDescription').value;
+            
+            if (!title || !price || !description) {
+                showAlertInDiv('sellAlert', 'error', 'Please fill all fields');
+                return;
+            }
+            
+            const products = getProducts();
+            const newProduct = {
+                id: Date.now(),
+                seller: currentUser.username,
+                title: title,
+                category: category,
+                price: price,
+                description: description,
+                image: "",
+                created_at: new Date().toISOString()
+            };
+            products.unshift(newProduct);
+            saveProducts(products);
+            showAlertInDiv('sellAlert', 'success', '✅ Product listed successfully!');
+            setTimeout(() => showPage('products'), 1500);
+        }
+
+        function addJob() {
+            const title = document.getElementById('jobTitle').value;
+            const location = document.getElementById('jobLocation').value;
+            const jobType = document.getElementById('jobType').value;
+            const salary = document.getElementById('jobSalary').value;
+            const description = document.getElementById('jobDescription').value;
+            
+            if (!title || !location || !description) {
+                showAlertInDiv('jobAlert', 'error', 'Please fill required fields');
+                return;
+            }
+            
+            const jobs = getJobs();
+            const newJob = {
+                id: Date.now(),
+                employer: currentUser.username,
+                title: title,
+                location: location,
+                job_type: jobType,
+                description: description,
+                salary: salary,
+                created_at: new Date().toISOString()
+            };
+            jobs.unshift(newJob);
+            saveJobs(jobs);
+            showAlertInDiv('jobAlert', 'success', '✅ Job posted successfully!');
+            setTimeout(() => showPage('jobs'), 1500);
+        }
+
+        // ============ FILTERS ============
+        function filterProducts(category) {
+            const products = getProducts();
+            const filtered = category ? products.filter(p => p.category === category) : products;
+            const grid = document.getElementById('productsGrid');
+            if (grid) {
+                const isAdmin = currentUser && currentUser.role === 'admin';
+                grid.innerHTML = filtered.map(p => renderFullProductCard(p, isAdmin)).join('');
+            }
+        }
+
+        function filterJobs(type) {
+            const jobs = getJobs();
+            const filtered = type ? jobs.filter(j => j.job_type === type) : jobs;
+            const grid = document.getElementById('jobsGrid');
+            if (grid) {
+                const typeLabels = { full: 'Full-time', part: 'Part-time', contract: 'Contract', remote: 'Remote' };
+                grid.innerHTML = filtered.map(job => `
+                    <div class="compartment">
+                        <div class="compartment-header">
+                            <h3>${escapeHtml(job.title)}</h3>
+                            <span class="badge">${typeLabels[job.job_type] || job.job_type}</span>
+                        </div>
+                        <div class="compartment-body">
+                            <div class="item-meta">📍 ${job.location}</div>
+                            <div class="item-meta">💰 ${job.salary || 'Negotiable'}</div>
+                            <p style="margin: 0.5rem 0;">${escapeHtml(job.description)}</p>
+                            <div class="item-meta">👤 Posted by: ${job.employer}</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // ============ UTILITIES ============
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function showAlert(type, message) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert ${type}`;
+            alertDiv.innerHTML = message;
+            document.body.appendChild(alertDiv);
+            setTimeout(() => alertDiv.remove(), 3000);
+        }
+
+        function showAlertInDiv(divId, type, message) {
+            const div = document.getElementById(divId);
+            if (div) {
+                div.className = `alert ${type}`;
+                div.innerHTML = message;
+                setTimeout(() => {
+                    div.className = 'alert';
+                    div.innerHTML = '';
+                }, 3000);
+            }
+        }
+
+        // ============ INITIALIZE ============
+        checkAuth();
+        showPage('home');
+    </script>
+</body>
+</html>
